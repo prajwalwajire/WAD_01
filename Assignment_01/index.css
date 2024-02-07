@@ -1,0 +1,47 @@
+/* Additional inline CSS for the stylish navbar */
+
+.navbar {
+    background-color:#ff6600; /* Royal blue background color */
+    color: #fff; /* White text color */
+    padding: 10px 0; /* Adjust the padding as needed */
+}
+
+.navbar h1 {
+    margin: 0;
+    padding-left: 20px; /* Add padding to the left of the heading */
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline;
+    margin-right: 20px;
+}
+
+/* Style the "Shop Now" button */
+.shop-now-btn {
+    background-color: #ff9900;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.shop-now-btn:hover {
+    background-color: #ff6600;
+}
+
+/* Change the layout to 3-3 (3 products per row) */
+.featured-products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product {
+    flex-basis: calc(33.33% - 20px);
+    margin-bottom: 20px;
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfume Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1 style="font-family: 'Libre Baskerville', serif;">Welcome to Perfume World</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="featured-products">
+        <div class="product">
+            <img src="https://th.bing.com/th?id=OIP.5pwowypyaTF3jtRwNKpb5AHaEo&w=316&h=197&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2.jpg" alt="Perfume 1">
+            <h3 style="font-family: 'Libre Baskerville', serif;">Lattafa</h3>
+            <p>Description of Lattafa</p>
+            <span class="price">₹2,499.99</span>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+        <div class="product">
+            <img src="https://th.bing.com/th?id=OIP.t7Afz3NUYIKboODTs1MD9AHaIa&w=234&h=266&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2.jpg" alt="Perfume 2">
+            <h3 style="font-family: 'Libre Baskerville', serif;">Poison:Extrait De Parfum</h3>
+            <p>Description of Poison:Extrait De Parfum.</p>
+            <span class="price">₹3,199.99</span>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+        <div class="product">
+            <img src="https://th.bing.com/th/id/OIP.pagdRWh3pu9S0dka0UtGjAHaIa?w=161&h=184&c=7&r=0&o=5&dpr=1.3&pid=1.7.jpg" alt="Perfume 3">
+            <h3 style="font-family: 'Libre Baskerville', serif;">Rasasi</h3>
+            <p>Description of Rasasi</p>
+            <span class="price">₹2,799.99</span>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+        <div class="product">
+            <img src="https://th.bing.com/th/id/OIP.RX8UUN4McHaKeevL6rXXWQHaHa?w=184&h=184&c=7&r=0&o=5&dpr=1.3&pid=1.7.jpg" alt="Perfume 4">
+            <h3 style="font-family: 'Libre Baskerville', serif;">Davidoff Cool Water EDT</h3>
+            <p>Description of Davidoff Cool Water EDT</p>
+            <span class="price">₹1,899.99</span>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+        <div class="product">
+            <img src="https://th.bing.com/th/id/OIP.11UQmKBQX-xy6rMFj7-g5wHaJP?pid=ImgDet&w=196&h=244&c=7&dpr=1.3.jpg" alt="Perfume 5">
+            <h3 style="font-family: 'Libre Baskerville', serif;">Calvin Klein Beauty EDP</h3>
+            <p>Description of Calvin Klein Beauty EDP</p>
+            <span class="price">₹2,999.99</span>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+        <div class="product">
+            <img src="https://th.bing.com/th/id/OIP.gN-mny2_iV5Dw1GYDqil7QAAAA?pid=ImgDet&w=196&h=196&c=7&dpr=1.3.jpg" alt="Perfume 6">
+            <h3 style="font-family: 'Libre Baskerville', serif;">Montblanc Explorer</h3>
+            <p>Description of Montblanc Explorer</p>
+            <span class="price">₹2,499.99</span>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+    </section>
+    <section class="cart">
+        <h2>Your Cart</h2>
+        <ul id="cart-items">
+            <!-- Cart items will be displayed here -->
+        </ul>
+        <p>Total: ₹<span id="cart-total">0.00</span></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Perfume Shop</p>
+    </footer>
+
+    <script>
+        // JavaScript for cart functionality
+        let cart = [];
+        let cartTotal = 0;
+
+        function addToCart(productName, price) {
+            cart.push({ productName, price });
+            cartTotal += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsElement = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+
+            cartItemsElement.innerHTML = '';
+            cart.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${item.productName}: ₹${item.price.toFixed(2)}`;
+                cartItemsElement.appendChild(listItem);
+            });
+
+            cartTotalElement.textContent = cartTotal.toFixed(2);
+        }
+
+        // Add event listeners to the "Add to Cart" buttons for each product
+        const addToCartButtons = document.querySelectorAll('.product .btn');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const product = button.parentElement;
+                const productName = product.querySelector('h3').textContent;
+                const priceString = product.querySelector('.price').textContent;
+                const price = parseFloat(priceString.replace('₹', '').replace(',', ''));
+                addToCart(productName, price);
+                updateCart(); // Update the cart immediately after adding a product
+            });
+        });
+    </script>
+    
+    
+    <footer>
+        <p>&copy; 2023 Perfume Shop</p>
+    </footer>
+</body>
+</html>
